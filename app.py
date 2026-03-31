@@ -115,6 +115,39 @@ FAQS: List[FAQ] = [
         keywords=["seguimiento", "numero", "tracking", "donde veo mi pedido", "codigo envio"],
         follow_ups=["Mi pedido no llegó todavía", "¿En cuánto llega?"],
     ),
+    FAQ(
+        key="envios_pais",
+        title="¿Hacen envíos a todo el país?",
+        answer=(
+            "Sí, hacemos envíos a todo Argentina 🇦🇷\n\n"
+            "Llegamos sin problema a cualquier provincia 👍\n\n"
+            "Si querés, te cuento también cuánto tarda en llegar a tu zona."
+        ),
+        keywords=["envios", "envíos", "tucuman", "tucumán", "interior", "provincia", "envian", "envían", "a todo el pais", "argentina"],
+        follow_ups=["¿En cuánto llega?", "¿Cómo hago para comprar?"],
+    ),
+    FAQ(
+        key="no_funciona",
+        title="¿Qué pasa si el producto no funciona?",
+        answer=(
+            "Si no te funciona como esperabas, escribinos y lo vemos juntos 👍\n\n"
+            "Nos importa que te sirva, no que compres y listo.\n\n"
+            f"Podés contactarnos a {SUPPORT_EMAIL} y te ayudamos con tu caso."
+        ),
+        keywords=["no funciona", "no me sirvio", "no sirve", "garantia", "garantía", "devolucion", "devolución"],
+        follow_ups=["¿Sirve para mi rayón?", "¿Cómo se aplica?"],
+    ),
+    FAQ(
+        key="rinde",
+        title="¿Cuánto rinde una botella?",
+        answer=(
+            "Rinde bastante 👍\n\n"
+            "Los 200ml alcanzan para varias aplicaciones, dependiendo del uso.\n\n"
+            "Al ser poca cantidad por aplicación, suele durar bastante más de lo que parece."
+        ),
+        keywords=["rinde", "cuanto rinde", "cuanto dura", "cuantas aplicaciones", "contenido", "ml"],
+        follow_ups=["¿Cómo se aplica?", "¿Sirve para mi rayón?"],
+    ),
 ]
 
 BASE_QUICK_REPLIES = [

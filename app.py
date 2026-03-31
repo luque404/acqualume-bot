@@ -147,6 +147,17 @@ FAQS: List[FAQ] = [
         keywords=["rinde", "cuanto rinde", "cuanto dura", "cuantas aplicaciones", "contenido", "ml"],
         follow_ups=["¿Cómo se aplica?", "¿Sirve para mi rayón?"],
     ),
+    FAQ(
+        key="precio",
+        title="¿Cuánto sale?",
+        answer=(
+            "El precio lo podés ver directamente acá en la página, aprovechá que quedan pocas unidades 👍\n\n"
+            "Ahora mismo hay descuentos activos, así que está más barato de lo normal.\n\n"
+            "Si querés, te ayudo con la compra."
+        ),
+        keywords=["precio", "cuanto sale", "cuánto sale", "cuanto vale", "cuánto vale", "vale", "precio producto"],
+        follow_ups=["¿Cómo hago para comprar?", "¿En cuánto llega?"],
+    ),
 ]
 
 BASE_QUICK_REPLIES = [

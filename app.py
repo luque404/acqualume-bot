@@ -303,6 +303,9 @@ def config():
 def chat():
     data = request.get_json(silent=True) or {}
     message = str(data.get("message", "")).strip()
+
+    print("USER:", message)
+    
     if not message:
         return jsonify({"reply": "Escribime tu consulta y te ayudo.", "suggestions": default_suggestions()}), 400
 

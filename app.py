@@ -143,7 +143,6 @@ FAQS: List[FAQ] = [
             "Rinde bastante 👍\n\n"
             "Los 200ml alcanzan para varias aplicaciones, dependiendo del uso.\n\n"
             "Si tenés varios rayones, muchos aprovechan y compran más de uno para tener a mano."
-    ),
         ),
         keywords=["rinde", "cuanto rinde", "cuanto dura", "cuantas aplicaciones", "contenido", "ml"],
         follow_ups=["¿Cómo se aplica?", "¿Sirve para mi rayón?"],

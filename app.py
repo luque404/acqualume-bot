@@ -16,7 +16,7 @@ BRAND_NAME = os.getenv("BRAND_NAME", "AcquaLume")
 PRIMARY_COLOR = os.getenv("PRIMARY_COLOR", "#0f172a")
 SECONDARY_COLOR = os.getenv("SECONDARY_COLOR", "#06b6d4")
 SUPPORT_EMAIL = os.getenv("SUPPORT_EMAIL", "tienda.acqualume@hotmail.com")
-INSTAGRAM_URL = os.getenv("INSTAGRAM_URL", "https://instagram.com/acqualume")
+INSTAGRAM_URL = os.getenv("INSTAGRAM_URL", "https://instagram.com/acqualume.detailing")
 WHATSAPP_NUMBER = os.getenv("WHATSAPP_NUMBER", "")
 
 

@@ -384,7 +384,23 @@ WIDGET_HTML = """
     *{box-sizing:border-box}
     body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#fff;color:var(--text)}
     .chat{display:flex;flex-direction:column;height:100vh}
-    .header{padding:14px 16px;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff}
+    .header{
+        position: relative;
+        padding:14px 16px;
+        background:linear-gradient(135deg,var(--primary),var(--secondary));
+        color:#fff
+    }
+
+    .close-btn{
+        position:absolute;
+        top:10px;
+        right:12px;
+        background:transparent;
+        border:none;
+        color:#fff;
+        font-size:18px;
+        cursor:pointer;
+    }
     .header-title{font-weight:700}
     .header-sub{font-size:13px;opacity:.95;margin-top:4px}
     .messages{flex:1;overflow:auto;padding:14px;background:var(--bg)}
@@ -403,8 +419,9 @@ WIDGET_HTML = """
 <body>
   <div class="chat">
     <div class="header">
-      <div class="header-title">{{ brand_name }}</div>
-      <div class="header-sub">Te ayudamos con dudas sobre el producto, aplicación y envíos</div>
+        <button id="closeBtn" class="close-btn">✕</button>
+        <div class="header-title">{{ brand_name }}</div>
+        <div class="header-sub">Te ayudamos con dudas sobre el producto, aplicación y envíos</div>
     </div>
 
     <div id="messages" class="messages"></div>
@@ -478,6 +495,9 @@ WIDGET_HTML = """
   });
 
   loadConfig();
+document.getElementById('closeBtn').addEventListener('click', function () {
+  window.parent.postMessage('closeChat', '*');
+});
 </script>
 </body>
 </html>
@@ -531,6 +551,12 @@ WIDGET_JS = r"""
 
   document.body.appendChild(frame);
   document.body.appendChild(button);
+
+  window.addEventListener('message', function (event) {
+    if (event.data === 'closeChat') {
+      frame.style.display = 'none';
+    }
+});
 })();
 """
 

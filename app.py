@@ -46,10 +46,12 @@ FAQS: List[FAQ] = [
         key="rayones",
         title="¿Sirve para todo tipo de rayones?",
         answer=(
-            "Funciona muy bien en rayones y marcas superficiales, que son los más comunes 👍\n\n"
-            "Si el rayón ya es profundo, se siente mucho con la uña o llegó a la pintura base, ahí normalmente ya requiere otro tipo de solución.\n\n"
-            f"Si no estás seguro, podés escribirnos a {SUPPORT_EMAIL} y te ayudamos a evaluarlo."
-        ),
+            "Funciona muy bien en rayones y marcas superficiales 👍\n\n"
+            "Si el rayón ya es profundo (se siente bastante con la uña o llegó a la pintura base), ahí normalmente ya requiere otro tipo de solución.\n\n"
+            "Una forma rápida de orientarte es esta 👇\n\n"
+            "Si el rayón casi no se siente al pasar la uña, suele ser superficial y el producto puede ayudarte mucho 👍\n\n"
+            f"Si no estás seguro, podés escribirnos a {SUPPORT_EMAIL} y te ayudamos con tu caso sin problema."
+        ),,
         keywords=["rayon", "rayones", "profundo", "superficial", "chapa", "pintura", "marca", "sirve para mi rayon"],
         follow_ups=["¿Cómo se aplica?", "¿Cómo hago para comprar?"],
     ),
@@ -68,8 +70,9 @@ FAQS: List[FAQ] = [
         title="¿En cuánto llega?",
         answer=(
             "Los envíos suelen tardar entre 3 y 8 días hábiles, dependiendo de la zona y la logística 👍\n\n"
-            "En la mayoría de los casos llegan dentro de ese rango sin problema.\n\n"
-            "Si ya hiciste tu compra, podés seguir el envío con tu número de seguimiento."
+            "La gran mayoría llega dentro de ese rango sin inconvenientes.\n\n"
+            "Si ya hiciste tu compra, podés seguir el envío con tu número de seguimiento.\n\n"
+            f"Si ves alguna demora o algo que no te cierra, escribinos a {SUPPORT_EMAIL} y lo vemos con vos."
         ),
         keywords=["llega", "llegar", "demora", "dias", "días", "envio", "envío", "tiempo", "cuando llega", "cuanto tarda"],
         follow_ups=["Mi pedido no llegó todavía", "¿Cómo hago para comprar?"],
@@ -91,14 +94,26 @@ FAQS: List[FAQ] = [
         title="¿Cómo se aplica?",
         answer=(
             "Es bastante simple de usar 👇\n\n"
-            "1. Limpiá y secá bien la superficie, siempre a la sombra y con la pintura fría.\n"
-            "2. Aplicá una pequeña cantidad en un paño de microfibra o aplicador.\n"
-            "3. Trabajá en secciones chicas con movimientos uniformes.\n"
-            "4. Retirá el exceso con un paño limpio.\n\n"
-            "En unos minutos ya podés ver cómo mejora el rayón."
+            "1. Limpiá y secá bien la superficie (siempre a la sombra y con la pintura fría)\n"
+            "2. Aplicá una pequeña cantidad en un paño de microfibra o aplicador\n"
+            "3. Trabajá en secciones chicas con movimientos uniformes\n"
+            "4. Retirá el exceso con un paño limpio\n\n"
+            "En unos minutos ya podés empezar a notar cómo mejora el rayón 👍\n\n"
+            "Si querés, te doy algunos tips para sacarle el mejor resultado según tu caso."
         ),
         keywords=["aplico", "aplicar", "uso", "usar", "como se usa", "cómo se usa", "pasos", "microfibra"],
         follow_ups=["¿Sirve para mi rayón?", "¿Funciona en todos los colores?"],
+    ),
+    FAQ(
+        key="seguimiento_mail",
+        title="¿Cómo veo mi número de seguimiento?",
+        answer=(
+            "El número de seguimiento suele enviarse por mail unos días después de haber realizado la compra 👍\n\n"
+            "Te recomendamos revisar también la carpeta de spam o promociones por si llegó ahí.\n\n"
+            f"Si no lo encontrás o tenés alguna duda, podés escribirnos a {SUPPORT_EMAIL} y te lo pasamos."
+        ),  
+        keywords=["seguimiento", "numero", "tracking", "donde veo mi pedido", "codigo envio"],
+        follow_ups=["Mi pedido no llegó todavía", "¿En cuánto llega?"],
     ),
 ]
 

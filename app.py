@@ -528,18 +528,18 @@ WIDGET_JS = r"""
   var label = document.createElement('div');
   label.innerText = '¿Dudas?';
   label.style.position = 'fixed';
-  label.style.right = '30px';
-  label.style.bottom = '95px';
-  label.style.transform = 'translateX(0)';
+  label.style.right = '20px';
+  label.style.bottom = '82px';
   label.style.background = '#0f172a';
   label.style.color = '#fff';
-  label.style.padding = '6px 12px';
+  label.style.padding = '4px 10px';
   label.style.borderRadius = '999px';
-  label.style.fontSize = '13px';
+  label.style.fontSize = '12px';
   label.style.fontWeight = '600';
-  label.style.boxShadow = '0 8px 20px rgba(0,0,0,0.25)';
+  label.style.boxShadow = '0 6px 15px rgba(0,0,0,0.2)';
   label.style.zIndex = '999999';
   label.style.whiteSpace = 'nowrap';
+  label.style.transform = 'translateX(20%)';
   button.setAttribute('aria-label', 'Abrir chat');
   button.innerHTML = '💬';
   button.style.position = 'fixed';
@@ -573,9 +573,12 @@ WIDGET_JS = r"""
   frame.style.zIndex = '999998';
   frame.style.display = 'none';
 
-  button.addEventListener('click', function () {
-    frame.style.display = frame.style.display === 'none' ? 'block' : 'none';
-  });
+button.addEventListener('click', function () {
+  var isOpen = frame.style.display === 'block';
+
+  frame.style.display = isOpen ? 'none' : 'block';
+  label.style.display = isOpen ? 'block' : 'none';
+});
 
   document.body.appendChild(frame);
   document.body.appendChild(button);

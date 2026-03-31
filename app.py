@@ -51,7 +51,7 @@ FAQS: List[FAQ] = [
             "Una forma rápida de orientarte es esta 👇\n\n"
             "Si el rayón casi no se siente al pasar la uña, suele ser superficial y el producto puede ayudarte mucho 👍\n\n"
             f"Si no estás seguro, podés escribirnos a {SUPPORT_EMAIL} y te ayudamos con tu caso sin problema."
-        ),,
+        ),
         keywords=["rayon", "rayones", "profundo", "superficial", "chapa", "pintura", "marca", "sirve para mi rayon"],
         follow_ups=["¿Cómo se aplica?", "¿Cómo hago para comprar?"],
     ),

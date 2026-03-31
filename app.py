@@ -526,17 +526,20 @@ WIDGET_JS = r"""
 
   var button = document.createElement('button');
   var label = document.createElement('div');
-  label.innerText = 'Chat';
+  label.innerText = '¿Dudas?';
   label.style.position = 'fixed';
-  label.style.right = '20px';
-  label.style.bottom = '88px';
+  label.style.right = '30px';
+  label.style.bottom = '95px';
+  label.style.transform = 'translateX(0)';
   label.style.background = '#0f172a';
   label.style.color = '#fff';
-  label.style.padding = '6px 10px';
+  label.style.padding = '6px 12px';
   label.style.borderRadius = '999px';
-  label.style.fontSize = '12px';
-  label.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+  label.style.fontSize = '13px';
+  label.style.fontWeight = '600';
+  label.style.boxShadow = '0 8px 20px rgba(0,0,0,0.25)';
   label.style.zIndex = '999999';
+  label.style.whiteSpace = 'nowrap';
   button.setAttribute('aria-label', 'Abrir chat');
   button.innerHTML = '💬';
   button.style.position = 'fixed';

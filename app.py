@@ -98,8 +98,7 @@ FAQS: List[FAQ] = [
             "2. Aplicá una pequeña cantidad en un paño de microfibra o aplicador\n"
             "3. Trabajá en secciones chicas con movimientos uniformes\n"
             "4. Retirá el exceso con un paño limpio\n\n"
-            "En unos minutos ya podés empezar a notar cómo mejora el rayón 👍\n\n"
-            "Si querés, te doy algunos tips para sacarle el mejor resultado según tu caso."
+            "Tip: muchos clientes usan un paño de microfibra para lograr un mejor resultado 👍"
         ),
         keywords=["aplico", "aplicar", "uso", "usar", "como se usa", "cómo se usa", "pasos", "microfibra"],
         follow_ups=["¿Sirve para mi rayón?", "¿Funciona en todos los colores?"],
@@ -143,7 +142,8 @@ FAQS: List[FAQ] = [
         answer=(
             "Rinde bastante 👍\n\n"
             "Los 200ml alcanzan para varias aplicaciones, dependiendo del uso.\n\n"
-            "Al ser poca cantidad por aplicación, suele durar bastante más de lo que parece."
+            "Si tenés varios rayones, muchos aprovechan y compran más de uno para tener a mano."
+    ),
         ),
         keywords=["rinde", "cuanto rinde", "cuanto dura", "cuantas aplicaciones", "contenido", "ml"],
         follow_ups=["¿Cómo se aplica?", "¿Sirve para mi rayón?"],

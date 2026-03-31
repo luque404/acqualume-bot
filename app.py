@@ -525,6 +525,18 @@ WIDGET_JS = r"""
   var baseUrl = "__BASE_URL__";
 
   var button = document.createElement('button');
+  var label = document.createElement('div');
+  label.innerText = 'Chat';
+  label.style.position = 'fixed';
+  label.style.right = '20px';
+  label.style.bottom = '88px';
+  label.style.background = '#0f172a';
+  label.style.color = '#fff';
+  label.style.padding = '6px 10px';
+  label.style.borderRadius = '999px';
+  label.style.fontSize = '12px';
+  label.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+  label.style.zIndex = '999999';
   button.setAttribute('aria-label', 'Abrir chat');
   button.innerHTML = '💬';
   button.style.position = 'fixed';
@@ -564,6 +576,7 @@ WIDGET_JS = r"""
 
   document.body.appendChild(frame);
   document.body.appendChild(button);
+  document.body.appendChild(label);
 
   window.addEventListener('message', function (event) {
     if (event.data === 'closeChat') {

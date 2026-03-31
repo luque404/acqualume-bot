@@ -539,7 +539,7 @@ WIDGET_JS = r"""
   label.style.boxShadow = '0 6px 15px rgba(0,0,0,0.2)';
   label.style.zIndex = '999999';
   label.style.whiteSpace = 'nowrap';
-  label.style.transform = 'translateX(20%)';
+  label.style.transform = 'translateX(10%)';
   button.setAttribute('aria-label', 'Abrir chat');
   button.innerHTML = '💬';
   button.style.position = 'fixed';

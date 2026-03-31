@@ -398,9 +398,16 @@ WIDGET_HTML = """
         background:transparent;
         border:none;
         color:#fff;
-        font-size:18px;
+        font-size:22px;
         cursor:pointer;
     }
+
+    @media (max-width: 600px){
+      .close-btn{
+        font-size:26px;
+      }
+    }
+    
     .header-title{font-weight:700}
     .header-sub{font-size:13px;opacity:.95;margin-top:4px}
     .messages{flex:1;overflow:auto;padding:14px;background:var(--bg)}

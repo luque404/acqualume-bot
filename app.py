@@ -417,7 +417,13 @@ WIDGET_HTML = """
     .quick{padding:12px;background:#fff;border-top:1px solid var(--border);display:flex;gap:8px;flex-wrap:wrap}
     .quick button{border:none;border-radius:999px;padding:8px 12px;background:#e2e8f0;color:#0f172a;cursor:pointer;font-size:12px}
     .composer{display:flex;gap:8px;padding:12px;background:#fff;border-top:1px solid var(--border)}
-    .composer input{flex:1;border:1px solid var(--border);border-radius:999px;padding:12px 14px;font-size:14px}
+    .composer input{
+      flex:1;
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:12px 14px;
+      font-size:16px;
+    }
     .composer button{border:none;border-radius:999px;padding:12px 16px;background:var(--primary);color:#fff;font-weight:700;cursor:pointer}
     .footer{padding:10px 14px;font-size:12px;color:var(--muted);background:#fff;border-top:1px solid var(--border)}
     a{color:inherit}

@@ -244,6 +244,9 @@ DOUBT_INTENT_KEYWORDS = {
 }
 
 
+
+
+
 TRACKING_MISSING_INTENT_KEYWORDS = {
     "no tengo numero de seguimiento",
     "no tengo número de seguimiento",
@@ -259,7 +262,6 @@ TRACKING_MISSING_INTENT_KEYWORDS = {
     "no encuentro mi numero de seguimiento",
     "no encuentro mi número de seguimiento",
 }
-
 
 
 def normalize_text(text: str) -> str:
@@ -372,7 +374,6 @@ def build_reply(message: str) -> tuple[str, List[str]]:
             "Te recomiendo revisar también spam o promociones por si llegó ahí.\n\n"
             "Con ese número después podés seguir tu pedido directamente desde la página de Andreani."
         ), ["Mi pedido no llegó todavía", "Hablar por mail"]
-
 
 
     faq = find_best_faq(message)
@@ -633,6 +634,29 @@ WIDGET_JS = r"""
   var baseUrl = "__BASE_URL__";
 
   var launcher = document.createElement('div');
+
+  var isMobile = window.matchMedia('(max-width: 600px)').matches;
+  launcher.style.position = 'fixed';
+  launcher.style.right = isMobile ? '14px' : '18px';
+  launcher.style.bottom = isMobile ? '72px' : '18px';
+  launcher.style.height = isMobile ? '56px' : '64px';
+  launcher.style.padding = isMobile ? '6px 6px 6px 10px' : '8px 8px 8px 14px';
+  launcher.style.borderRadius = '999px';
+  launcher.style.display = 'flex';
+  launcher.style.alignItems = 'center';
+  launcher.style.gap = isMobile ? '8px' : '10px';
+  launcher.style.background = 'rgba(15, 23, 42, 0.94)';
+  launcher.style.border = '1px solid rgba(255,255,255,0.15)';
+  launcher.style.boxShadow = '0 8px 18px rgba(2, 6, 23, 0.22)';
+  launcher.style.cursor = 'pointer';
+  launcher.style.zIndex = '999999';
+  launcher.style.overflow = 'visible';
+
+  var label = document.createElement('span');
+  label.innerText = 'Consultas';
+  label.style.color = '#e2e8f0';
+  label.style.fontSize = isMobile ? '12px' : '13px';
+
   launcher.style.position = 'fixed';
   launcher.style.right = '18px';
   launcher.style.bottom = '18px';
@@ -653,6 +677,7 @@ WIDGET_JS = r"""
   label.innerText = 'Te ayudamos';
   label.style.color = '#e2e8f0';
   label.style.fontSize = '13px';
+
   label.style.fontWeight = '600';
   label.style.letterSpacing = '0.2px';
   label.style.userSelect = 'none';
@@ -661,12 +686,20 @@ WIDGET_JS = r"""
   var button = document.createElement('button');
   button.setAttribute('aria-label', 'Abrir chat');
   button.innerHTML = '💬';
+
+  button.style.width = isMobile ? '42px' : '48px';
+  button.style.height = isMobile ? '42px' : '48px';
+
   button.style.width = '48px';
   button.style.height = '48px';
+
   button.style.border = 'none';
   button.style.borderRadius = '999px';
   button.style.background = 'linear-gradient(135deg, #0f172a 10%, #06b6d4 100%)';
   button.style.color = '#fff';
+  button.style.fontSize = isMobile ? '20px' : '22px';
+  button.style.cursor = 'pointer';
+  button.style.boxShadow = '0 4px 12px rgba(6, 182, 212, 0.28)';
   button.style.fontSize = '22px';
   button.style.cursor = 'pointer';
   button.style.boxShadow = '0 8px 20px rgba(6, 182, 212, 0.45)';
@@ -678,6 +711,8 @@ WIDGET_JS = r"""
   var frame = document.createElement('iframe');
   frame.src = baseUrl + '/widget';
   frame.style.position = 'fixed';
+  frame.style.right = isMobile ? '12px' : '18px';
+  frame.style.bottom = isMobile ? '136px' : '92px';
   frame.style.right = '18px';
   frame.style.bottom = '92px';
   frame.style.width = '380px';

@@ -295,9 +295,6 @@ def looks_like_tracking_number(message: str) -> bool:
 
 
 def find_best_faq(message: str) -> Optional[FAQ]:
-
-def find_best_faq(message: str) -> FAQ | None:
-
     text = normalize_text(message)
     best_faq = None
     best_score = 0
@@ -354,7 +351,6 @@ def build_reply(message: str) -> Tuple[str, List[str]]:
             "En esos casos suele dar muy buen resultado y por eso muchas personas lo eligen antes de gastar mucho más en otra solución."
         ), ["¿Cómo se aplica?", "¿Cuánto sale?"]
 
-in
     if looks_like_tracking_number(message):
         return (
             "Perfecto 👍\n\n"
@@ -372,10 +368,6 @@ in
             "Con ese número después podés seguir tu pedido directamente desde la página de Andreani."
         ), ["Mi pedido no llegó todavía", "Hablar por mail"]
 
-
-
-in
-> main
     faq = find_best_faq(message)
     if faq:
         return faq.answer, faq.follow_ups or default_suggestions()
@@ -632,12 +624,7 @@ WIDGET_JS = r"""
   window.__ACQUALUME_BOT_LOADED__ = true;
 
   var baseUrl = "__BASE_URL__";
-
   var launcher = document.createElement('div');
-
-
-main
-
   var isMobile = window.matchMedia('(max-width: 600px)').matches;
   launcher.style.position = 'fixed';
   launcher.style.right = isMobile ? '14px' : '18px';
@@ -651,6 +638,7 @@ main
   launcher.style.background = 'rgba(15, 23, 42, 0.94)';
   launcher.style.border = '1px solid rgba(255,255,255,0.15)';
   launcher.style.boxShadow = '0 8px 18px rgba(2, 6, 23, 0.22)';
+  launcher.style.backdropFilter = 'blur(6px)';
   launcher.style.cursor = 'pointer';
   launcher.style.zIndex = '999999';
   launcher.style.overflow = 'visible';
@@ -659,64 +647,23 @@ main
   label.innerText = 'Consultas';
   label.style.color = '#e2e8f0';
   label.style.fontSize = isMobile ? '12px' : '13px';
-
-
-  launcher.style.position = 'fixed';
-  launcher.style.right = '18px';
-  launcher.style.bottom = '18px';
-  launcher.style.height = '64px';
-  launcher.style.padding = '8px 8px 8px 14px';
-  launcher.style.borderRadius = '999px';
-  launcher.style.display = 'flex';
-  launcher.style.alignItems = 'center';
-  launcher.style.gap = '10px';
-  launcher.style.background = 'rgba(15, 23, 42, 0.94)';
-  launcher.style.border = '1px solid rgba(255,255,255,0.15)';
-  launcher.style.boxShadow = '0 16px 36px rgba(2, 6, 23, 0.35)';
-  launcher.style.backdropFilter = 'blur(6px)';
-  launcher.style.cursor = 'pointer';
-  launcher.style.zIndex = '999999';
-
-  var label = document.createElement('span');
-  label.innerText = 'Te ayudamos';
-  label.style.color = '#e2e8f0';
-  label.style.fontSize = '13px';
-
   label.style.fontWeight = '600';
   label.style.letterSpacing = '0.2px';
   label.style.userSelect = 'none';
   label.style.whiteSpace = 'nowrap';
-
-
 
   var button = document.createElement('button');
   button.setAttribute('aria-label', 'Abrir chat');
   button.innerHTML = '💬';
   button.style.width = isMobile ? '42px' : '48px';
   button.style.height = isMobile ? '42px' : '48px';
-
-  button.style.width = isMobile ? '42px' : '48px';
-  button.style.height = isMobile ? '42px' : '48px';
-  button.style.width = '48px';
-  button.style.height = '48px';
-
   button.style.border = 'none';
   button.style.borderRadius = '999px';
   button.style.background = 'linear-gradient(135deg, #0f172a 10%, #06b6d4 100%)';
   button.style.color = '#fff';
   button.style.fontSize = isMobile ? '20px' : '22px';
-
-  button.style.cursor = 'pointer';
-  button.style.boxShadow = '0 4px 12px rgba(6, 182, 212, 0.28)';
-
-  button.style.cursor = 'pointer';
-  button.style.boxShadow = '0 4px 12px rgba(6, 182, 212, 0.28)';
-  button.style.cursor = 'pointer';
-  button.style.boxShadow = '0 4px 12px rgba(6, 182, 212, 0.28)';
-  button.style.fontSize = '22px';
   button.style.cursor = 'pointer';
   button.style.boxShadow = '0 8px 20px rgba(6, 182, 212, 0.45)';
-
   button.style.display = 'flex';
   button.style.alignItems = 'center';
   button.style.justifyContent = 'center';
@@ -727,11 +674,6 @@ main
   frame.style.position = 'fixed';
   frame.style.right = isMobile ? '12px' : '18px';
   frame.style.bottom = isMobile ? '136px' : '92px';
-
-
-  frame.style.right = '18px';
-  frame.style.bottom = '92px';
-
   frame.style.width = '380px';
   frame.style.maxWidth = 'calc(100vw - 24px)';
   frame.style.height = '620px';
@@ -744,11 +686,10 @@ main
   frame.style.zIndex = '999998';
   frame.style.display = 'none';
 
-launcher.addEventListener('click', function () {
-  var isOpen = frame.style.display === 'block';
-
-  frame.style.display = isOpen ? 'none' : 'block';
-});
+  launcher.addEventListener('click', function () {
+    var isOpen = frame.style.display === 'block';
+    frame.style.display = isOpen ? 'none' : 'block';
+  });
 
   launcher.appendChild(label);
   launcher.appendChild(button);
@@ -759,7 +700,7 @@ launcher.addEventListener('click', function () {
     if (event.data === 'closeChat') {
       frame.style.display = 'none';
     }
-});
+  });
 })();
 """
 

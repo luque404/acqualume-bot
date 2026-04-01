@@ -580,42 +580,53 @@ WIDGET_JS = r"""
 
   var baseUrl = "__BASE_URL__";
 
-  var button = document.createElement('button');
-  var label = document.createElement('div');
-  label.innerText = '¿Dudas?';
-  label.style.position = 'fixed';
-  label.style.right = '20px';
-  label.style.bottom = '82px';
-  label.style.background = '#0f172a';
-  label.style.color = '#fff';
-  label.style.padding = '4px 10px';
-  label.style.borderRadius = '999px';
-  label.style.fontSize = '12px';
+  var launcher = document.createElement('div');
+  launcher.style.position = 'fixed';
+  launcher.style.right = '18px';
+  launcher.style.bottom = '18px';
+  launcher.style.height = '64px';
+  launcher.style.padding = '8px 8px 8px 14px';
+  launcher.style.borderRadius = '999px';
+  launcher.style.display = 'flex';
+  launcher.style.alignItems = 'center';
+  launcher.style.gap = '10px';
+  launcher.style.background = 'rgba(15, 23, 42, 0.94)';
+  launcher.style.border = '1px solid rgba(255,255,255,0.15)';
+  launcher.style.boxShadow = '0 16px 36px rgba(2, 6, 23, 0.35)';
+  launcher.style.backdropFilter = 'blur(6px)';
+  launcher.style.cursor = 'pointer';
+  launcher.style.zIndex = '999999';
+
+  var label = document.createElement('span');
+  label.innerText = 'Te ayudamos';
+  label.style.color = '#e2e8f0';
+  label.style.fontSize = '13px';
   label.style.fontWeight = '600';
-  label.style.boxShadow = '0 6px 15px rgba(0,0,0,0.2)';
-  label.style.zIndex = '999999';
+  label.style.letterSpacing = '0.2px';
+  label.style.userSelect = 'none';
   label.style.whiteSpace = 'nowrap';
-  label.style.transform = 'translateX(10%)';
+
+  var button = document.createElement('button');
   button.setAttribute('aria-label', 'Abrir chat');
   button.innerHTML = '💬';
-  button.style.position = 'fixed';
-  button.style.right = '20px';
-  button.style.bottom = '20px';
-  button.style.width = '60px';
-  button.style.height = '60px';
+  button.style.width = '48px';
+  button.style.height = '48px';
   button.style.border = 'none';
   button.style.borderRadius = '999px';
-  button.style.background = 'linear-gradient(135deg, #0f172a, #06b6d4)';
+  button.style.background = 'linear-gradient(135deg, #0f172a 10%, #06b6d4 100%)';
   button.style.color = '#fff';
-  button.style.fontSize = '26px';
+  button.style.fontSize = '22px';
   button.style.cursor = 'pointer';
-  button.style.boxShadow = '0 10px 30px rgba(2, 132, 199, .35)';
-  button.style.zIndex = '999999';
+  button.style.boxShadow = '0 8px 20px rgba(6, 182, 212, 0.45)';
+  button.style.display = 'flex';
+  button.style.alignItems = 'center';
+  button.style.justifyContent = 'center';
+  button.style.flexShrink = '0';
 
   var frame = document.createElement('iframe');
   frame.src = baseUrl + '/widget';
   frame.style.position = 'fixed';
-  frame.style.right = '20px';
+  frame.style.right = '18px';
   frame.style.bottom = '92px';
   frame.style.width = '380px';
   frame.style.maxWidth = 'calc(100vw - 24px)';
@@ -629,16 +640,16 @@ WIDGET_JS = r"""
   frame.style.zIndex = '999998';
   frame.style.display = 'none';
 
-button.addEventListener('click', function () {
+launcher.addEventListener('click', function () {
   var isOpen = frame.style.display === 'block';
 
   frame.style.display = isOpen ? 'none' : 'block';
-  label.style.display = isOpen ? 'block' : 'none';
 });
 
+  launcher.appendChild(label);
+  launcher.appendChild(button);
   document.body.appendChild(frame);
-  document.body.appendChild(button);
-  document.body.appendChild(label);
+  document.body.appendChild(launcher);
 
   window.addEventListener('message', function (event) {
     if (event.data === 'closeChat') {

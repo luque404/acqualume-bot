@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 import re
 from dataclasses import dataclass, field
-from typing import List
+from typing import List, Optional, Tuple
 
 from flask import Flask, jsonify, request, render_template_string, Response
 
@@ -293,7 +293,11 @@ def looks_like_tracking_number(message: str) -> bool:
     return False
 
 
+
+def find_best_faq(message: str) -> Optional[FAQ]:
+
 def find_best_faq(message: str) -> FAQ | None:
+
     text = normalize_text(message)
     best_faq = None
     best_score = 0
@@ -313,7 +317,7 @@ def find_best_faq(message: str) -> FAQ | None:
     return best_faq if best_score > 0 else None
 
 
-def build_reply(message: str) -> tuple[str, List[str]]:
+def build_reply(message: str) -> Tuple[str, List[str]]:
     msg = normalize_text(message)
 
     if msg in {"hola", "buenas", "buen dia", "buenos dias", "buenas tardes", "buenas noches"}:
@@ -350,7 +354,7 @@ def build_reply(message: str) -> tuple[str, List[str]]:
             "En esos casos suele dar muy buen resultado y por eso muchas personas lo eligen antes de gastar mucho más en otra solución."
         ), ["¿Cómo se aplica?", "¿Cuánto sale?"]
 
-
+in
     if looks_like_tracking_number(message):
         return (
             "Perfecto 👍\n\n"
@@ -368,7 +372,10 @@ def build_reply(message: str) -> tuple[str, List[str]]:
             "Con ese número después podés seguir tu pedido directamente desde la página de Andreani."
         ), ["Mi pedido no llegó todavía", "Hablar por mail"]
 
+
+
 in
+> main
     faq = find_best_faq(message)
     if faq:
         return faq.answer, faq.follow_ups or default_suggestions()
@@ -627,7 +634,10 @@ WIDGET_JS = r"""
   var baseUrl = "__BASE_URL__";
 
   var launcher = document.createElement('div');
+
+
 main
+
   var isMobile = window.matchMedia('(max-width: 600px)').matches;
   launcher.style.position = 'fixed';
   launcher.style.right = isMobile ? '14px' : '18px';
@@ -649,6 +659,8 @@ main
   label.innerText = 'Consultas';
   label.style.color = '#e2e8f0';
   label.style.fontSize = isMobile ? '12px' : '13px';
+
+
   launcher.style.position = 'fixed';
   launcher.style.right = '18px';
   launcher.style.bottom = '18px';
@@ -669,24 +681,34 @@ main
   label.innerText = 'Te ayudamos';
   label.style.color = '#e2e8f0';
   label.style.fontSize = '13px';
+
   label.style.fontWeight = '600';
   label.style.letterSpacing = '0.2px';
   label.style.userSelect = 'none';
   label.style.whiteSpace = 'nowrap';
+
+
+
   var button = document.createElement('button');
   button.setAttribute('aria-label', 'Abrir chat');
   button.innerHTML = '💬';
   button.style.width = isMobile ? '42px' : '48px';
   button.style.height = isMobile ? '42px' : '48px';
+
   button.style.width = isMobile ? '42px' : '48px';
   button.style.height = isMobile ? '42px' : '48px';
   button.style.width = '48px';
   button.style.height = '48px';
+
   button.style.border = 'none';
   button.style.borderRadius = '999px';
   button.style.background = 'linear-gradient(135deg, #0f172a 10%, #06b6d4 100%)';
   button.style.color = '#fff';
   button.style.fontSize = isMobile ? '20px' : '22px';
+
+  button.style.cursor = 'pointer';
+  button.style.boxShadow = '0 4px 12px rgba(6, 182, 212, 0.28)';
+
   button.style.cursor = 'pointer';
   button.style.boxShadow = '0 4px 12px rgba(6, 182, 212, 0.28)';
   button.style.cursor = 'pointer';
@@ -694,6 +716,7 @@ main
   button.style.fontSize = '22px';
   button.style.cursor = 'pointer';
   button.style.boxShadow = '0 8px 20px rgba(6, 182, 212, 0.45)';
+
   button.style.display = 'flex';
   button.style.alignItems = 'center';
   button.style.justifyContent = 'center';
@@ -704,8 +727,11 @@ main
   frame.style.position = 'fixed';
   frame.style.right = isMobile ? '12px' : '18px';
   frame.style.bottom = isMobile ? '136px' : '92px';
+
+
   frame.style.right = '18px';
   frame.style.bottom = '92px';
+
   frame.style.width = '380px';
   frame.style.maxWidth = 'calc(100vw - 24px)';
   frame.style.height = '620px';

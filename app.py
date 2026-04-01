@@ -222,6 +222,27 @@ ORDER_PROBLEM_KEYWORDS = {
     "mi pedido",
 }
 
+DOUBT_INTENT_KEYWORDS = {
+    "no se",
+    "no sé",
+    "funciona",
+    "funciona?",
+    "funciona posta",
+    "sirve",
+    "sirve?",
+    "sirve posta",
+    "vale la pena",
+    "es bueno",
+    "es confiable",
+    "tengo dudas",
+    "dudas",
+    "no estoy seguro",
+    "no estoy segura",
+    "me conviene",
+    "conviene",
+    "sirve de verdad",
+}
+
 
 def normalize_text(text: str) -> str:
     text = text.lower().strip()
@@ -294,6 +315,13 @@ def build_reply(message: str) -> tuple[str, List[str]]:
         faq = next((f for f in FAQS if f.key == "no_llego"), None)
         if faq:
             return faq.answer, faq.follow_ups or default_suggestions()
+
+    if any(keyword in msg for keyword in DOUBT_INTENT_KEYWORDS):
+        return (
+            "Sí, vale la pena si tu rayón es superficial 👍\n\n"
+            "Es un producto pensado para mejorar marcas y rayones leves sin afectar el color ni el brillo original.\n\n"
+            "En esos casos suele dar muy buen resultado y por eso muchas personas lo eligen antes de gastar mucho más en otra solución."
+        ), ["¿Cómo se aplica?", "¿Cuánto sale?"]
 
     faq = find_best_faq(message)
     if faq:

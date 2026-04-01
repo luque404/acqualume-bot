@@ -49,8 +49,7 @@ FAQS: List[FAQ] = [
             "Funciona muy bien en rayones y marcas superficiales 👍\n\n"
             "Si el rayón ya es profundo (se siente bastante con la uña o llegó a la pintura base), ahí normalmente ya requiere otro tipo de solución.\n\n"
             "Una forma rápida de orientarte es esta 👇\n\n"
-            "Si el rayón casi no se siente al pasar la uña, suele ser superficial y el producto puede ayudarte mucho 👍\n\n"
-            f"Si no estás seguro, podés escribirnos a {SUPPORT_EMAIL} y te ayudamos con tu caso sin problema."
+            "Si el rayón casi no se siente al pasar la uña, suele ser superficial y el producto puede ayudarte mucho 👍"
         ),
         keywords=["rayon", "rayones", "profundo", "superficial", "chapa", "pintura", "marca", "sirve para mi rayon"],
         follow_ups=["¿Cómo se aplica?", "¿Cómo hago para comprar?"],
@@ -60,7 +59,7 @@ FAQS: List[FAQ] = [
         title="¿Cómo hago para comprar?",
         answer=(
             "Podés comprar directamente desde esta misma página 👍\n\n"
-            f"Si antes de hacerlo tenés alguna duda sobre el producto o sobre tu caso, escribinos a {SUPPORT_EMAIL} y te ayudamos."
+            "Solo elegís la cantidad de unidades, las agregás al carrito y completás el pago al final."
         ),
         keywords=[
             "comprar", "compra", "carrito", "pagar", "pago", "pedido", "tienda", "precio", "lo quiero", "me interesa",
@@ -74,8 +73,7 @@ FAQS: List[FAQ] = [
         answer=(
             "Los envíos suelen tardar entre 3 y 8 días hábiles, dependiendo de la zona y la logística 👍\n\n"
             "La gran mayoría llega dentro de ese rango sin inconvenientes.\n\n"
-            "Si ya hiciste tu compra, podés seguir el envío con tu número de seguimiento.\n\n"
-            f"Si ves alguna demora o algo que no te cierra, escribinos a {SUPPORT_EMAIL} y lo vemos con vos."
+            "Si ya hiciste tu compra, podés seguir el envío con tu número de seguimiento."
         ),
         keywords=[
             "llega", "llegar", "demora", "dias", "días", "envio", "envío", "tiempo", "cuando llega", "cuanto tarda",
@@ -89,8 +87,7 @@ FAQS: List[FAQ] = [
         answer=(
             "Primero te recomiendo revisar el estado con el número de seguimiento 👇\n\n"
             "Si figura como ‘En camino’, significa que ya fue despachado y está en tránsito.\n"
-            "Si aparece como ‘Pendiente de ingreso’, puede ser que todavía no se haya actualizado o que esté por despacharse.\n\n"
-            f"Si ves alguna demora o algo raro, escribinos a {SUPPORT_EMAIL} y lo vemos con vos."
+            "Si aparece como ‘Pendiente de ingreso’, puede ser que todavía no se haya actualizado o que esté por despacharse."
         ),
         keywords=[
             "no llegó", "no llego", "no me llegó", "seguimiento", "en camino", "pendiente de ingreso", "andreani", "pedido no llego",
@@ -244,9 +241,6 @@ DOUBT_INTENT_KEYWORDS = {
 }
 
 
-
-
-
 TRACKING_MISSING_INTENT_KEYWORDS = {
     "no tengo numero de seguimiento",
     "no tengo número de seguimiento",
@@ -336,8 +330,7 @@ def build_reply(message: str) -> tuple[str, List[str]]:
         return (
             "Una forma rápida de orientarte es esta 👇\n\n"
             "Si el rayón casi no se siente al pasar la uña, suele ser superficial y el producto puede ayudarte mucho.\n\n"
-            "Si se siente bastante, ya es más profundo y probablemente necesite otro tipo de trabajo.\n\n"
-            f"Si querés, también podés escribirnos a {SUPPORT_EMAIL} y te ayudamos con tu caso."
+            "Si se siente bastante, ya es más profundo y probablemente necesite otro tipo de trabajo."
         ), ["¿Cómo se aplica?", "¿Funciona en todos los colores?"]
 
     if any(keyword in msg for keyword in MAIL_INTENT_KEYWORDS):
@@ -375,7 +368,7 @@ def build_reply(message: str) -> tuple[str, List[str]]:
             "Con ese número después podés seguir tu pedido directamente desde la página de Andreani."
         ), ["Mi pedido no llegó todavía", "Hablar por mail"]
 
-
+in
     faq = find_best_faq(message)
     if faq:
         return faq.answer, faq.follow_ups or default_suggestions()
@@ -634,7 +627,7 @@ WIDGET_JS = r"""
   var baseUrl = "__BASE_URL__";
 
   var launcher = document.createElement('div');
-
+main
   var isMobile = window.matchMedia('(max-width: 600px)').matches;
   launcher.style.position = 'fixed';
   launcher.style.right = isMobile ? '14px' : '18px';
@@ -656,7 +649,6 @@ WIDGET_JS = r"""
   label.innerText = 'Consultas';
   label.style.color = '#e2e8f0';
   label.style.fontSize = isMobile ? '12px' : '13px';
-
   launcher.style.position = 'fixed';
   launcher.style.right = '18px';
   launcher.style.bottom = '18px';
@@ -677,27 +669,26 @@ WIDGET_JS = r"""
   label.innerText = 'Te ayudamos';
   label.style.color = '#e2e8f0';
   label.style.fontSize = '13px';
-
   label.style.fontWeight = '600';
   label.style.letterSpacing = '0.2px';
   label.style.userSelect = 'none';
   label.style.whiteSpace = 'nowrap';
-
   var button = document.createElement('button');
   button.setAttribute('aria-label', 'Abrir chat');
   button.innerHTML = '💬';
-
   button.style.width = isMobile ? '42px' : '48px';
   button.style.height = isMobile ? '42px' : '48px';
-
+  button.style.width = isMobile ? '42px' : '48px';
+  button.style.height = isMobile ? '42px' : '48px';
   button.style.width = '48px';
   button.style.height = '48px';
-
   button.style.border = 'none';
   button.style.borderRadius = '999px';
   button.style.background = 'linear-gradient(135deg, #0f172a 10%, #06b6d4 100%)';
   button.style.color = '#fff';
   button.style.fontSize = isMobile ? '20px' : '22px';
+  button.style.cursor = 'pointer';
+  button.style.boxShadow = '0 4px 12px rgba(6, 182, 212, 0.28)';
   button.style.cursor = 'pointer';
   button.style.boxShadow = '0 4px 12px rgba(6, 182, 212, 0.28)';
   button.style.fontSize = '22px';

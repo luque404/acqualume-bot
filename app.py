@@ -62,7 +62,10 @@ FAQS: List[FAQ] = [
             "Podés comprar directamente desde esta misma página 👍\n\n"
             f"Si antes de hacerlo tenés alguna duda sobre el producto o sobre tu caso, escribinos a {SUPPORT_EMAIL} y te ayudamos."
         ),
-        keywords=["comprar", "compra", "carrito", "pagar", "pago", "pedido", "tienda", "precio", "lo quiero", "me interesa"],
+        keywords=[
+            "comprar", "compra", "carrito", "pagar", "pago", "pedido", "tienda", "precio", "lo quiero", "me interesa",
+            "como compro", "donde compro", "quiero pedir", "quiero encargar", "como hago el pedido"
+        ],
         follow_ups=["¿Sirve para mi rayón?", "¿En cuánto llega?"],
     ),
     FAQ(
@@ -74,7 +77,10 @@ FAQS: List[FAQ] = [
             "Si ya hiciste tu compra, podés seguir el envío con tu número de seguimiento.\n\n"
             f"Si ves alguna demora o algo que no te cierra, escribinos a {SUPPORT_EMAIL} y lo vemos con vos."
         ),
-        keywords=["llega", "llegar", "demora", "dias", "días", "envio", "envío", "tiempo", "cuando llega", "cuanto tarda"],
+        keywords=[
+            "llega", "llegar", "demora", "dias", "días", "envio", "envío", "tiempo", "cuando llega", "cuanto tarda",
+            "cuando me llega", "cuanto demora", "demora envio", "tarda mucho", "plazo de entrega"
+        ],
         follow_ups=["Mi pedido no llegó todavía", "¿Cómo hago para comprar?"],
     ),
     FAQ(
@@ -86,7 +92,10 @@ FAQS: List[FAQ] = [
             "Si aparece como ‘Pendiente de ingreso’, puede ser que todavía no se haya actualizado o que esté por despacharse.\n\n"
             f"Si ves alguna demora o algo raro, escribinos a {SUPPORT_EMAIL} y lo vemos con vos."
         ),
-        keywords=["no llegó", "no llego", "no me llegó", "seguimiento", "en camino", "pendiente de ingreso", "andreani", "pedido no llego"],
+        keywords=[
+            "no llegó", "no llego", "no me llegó", "seguimiento", "en camino", "pendiente de ingreso", "andreani", "pedido no llego",
+            "mi pedido no aparece", "no tengo novedades", "no avanza el seguimiento", "no se actualiza", "sigue igual"
+        ],
         follow_ups=["¿En cuánto llega?", "Hablar por mail"],
     ),
     FAQ(
@@ -100,7 +109,10 @@ FAQS: List[FAQ] = [
             "4. Retirá el exceso con un paño limpio\n\n"
             "Tip: muchos clientes usan un paño de microfibra para lograr un mejor resultado 👍"
         ),
-        keywords=["aplico", "aplicar", "uso", "usar", "como se usa", "cómo se usa", "pasos", "microfibra"],
+        keywords=[
+            "aplico", "aplicar", "uso", "usar", "como se usa", "cómo se usa", "pasos", "microfibra",
+            "aplicar producto", "como aplicarlo", "como aplico", "modo de uso", "instrucciones", "como se pone"
+        ],
         follow_ups=["¿Sirve para mi rayón?", "¿Funciona en todos los colores?"],
     ),
     FAQ(
@@ -167,11 +179,14 @@ BASE_QUICK_REPLIES = [
 ]
 
 GREETING = (
-    f"Hola, soy el asistente virtual de {BRAND_NAME}. Te ayudo con dudas sobre el producto, aplicación, compras y envíos."
+    f"Hola, soy el asistente virtual de {BRAND_NAME} 👋\n"
+    "Te puedo ayudar con dudas sobre cómo se usa, si sirve para tu rayón, envíos y compra."
 )
 
 FALLBACK = (
-    f"No encontré una respuesta exacta para eso. Si querés, escribinos a {SUPPORT_EMAIL} y te ayudamos personalmente."
+    "No encontré una respuesta exacta para eso.\n"
+    f"Si querés, podés escribirnos a {SUPPORT_EMAIL} y te ayudamos personalmente.\n"
+    "También podés preguntarme por aplicación, envíos, compras o si sirve para tu rayón."
 )
 
 BUY_INTENT_KEYWORDS = {
@@ -205,6 +220,27 @@ ORDER_PROBLEM_KEYWORDS = {
     "tengo un problema con mi pedido",
     "problema con mi pedido",
     "mi pedido",
+}
+
+DOUBT_INTENT_KEYWORDS = {
+    "no se",
+    "no sé",
+    "funciona",
+    "funciona?",
+    "funciona posta",
+    "sirve",
+    "sirve?",
+    "sirve posta",
+    "vale la pena",
+    "es bueno",
+    "es confiable",
+    "tengo dudas",
+    "dudas",
+    "no estoy seguro",
+    "no estoy segura",
+    "me conviene",
+    "conviene",
+    "sirve de verdad",
 }
 
 
@@ -279,6 +315,13 @@ def build_reply(message: str) -> tuple[str, List[str]]:
         faq = next((f for f in FAQS if f.key == "no_llego"), None)
         if faq:
             return faq.answer, faq.follow_ups or default_suggestions()
+
+    if any(keyword in msg for keyword in DOUBT_INTENT_KEYWORDS):
+        return (
+            "Sí, vale la pena si tu rayón es superficial 👍\n\n"
+            "Es un producto pensado para mejorar marcas y rayones leves sin afectar el color ni el brillo original.\n\n"
+            "En esos casos suele dar muy buen resultado y por eso muchas personas lo eligen antes de gastar mucho más en otra solución."
+        ), ["¿Cómo se aplica?", "¿Cuánto sale?"]
 
     faq = find_best_faq(message)
     if faq:
@@ -537,42 +580,53 @@ WIDGET_JS = r"""
 
   var baseUrl = "__BASE_URL__";
 
-  var button = document.createElement('button');
-  var label = document.createElement('div');
-  label.innerText = '¿Dudas?';
-  label.style.position = 'fixed';
-  label.style.right = '20px';
-  label.style.bottom = '82px';
-  label.style.background = '#0f172a';
-  label.style.color = '#fff';
-  label.style.padding = '4px 10px';
-  label.style.borderRadius = '999px';
-  label.style.fontSize = '12px';
+  var launcher = document.createElement('div');
+  launcher.style.position = 'fixed';
+  launcher.style.right = '18px';
+  launcher.style.bottom = '18px';
+  launcher.style.height = '64px';
+  launcher.style.padding = '8px 8px 8px 14px';
+  launcher.style.borderRadius = '999px';
+  launcher.style.display = 'flex';
+  launcher.style.alignItems = 'center';
+  launcher.style.gap = '10px';
+  launcher.style.background = 'rgba(15, 23, 42, 0.94)';
+  launcher.style.border = '1px solid rgba(255,255,255,0.15)';
+  launcher.style.boxShadow = '0 16px 36px rgba(2, 6, 23, 0.35)';
+  launcher.style.backdropFilter = 'blur(6px)';
+  launcher.style.cursor = 'pointer';
+  launcher.style.zIndex = '999999';
+
+  var label = document.createElement('span');
+  label.innerText = 'Te ayudamos';
+  label.style.color = '#e2e8f0';
+  label.style.fontSize = '13px';
   label.style.fontWeight = '600';
-  label.style.boxShadow = '0 6px 15px rgba(0,0,0,0.2)';
-  label.style.zIndex = '999999';
+  label.style.letterSpacing = '0.2px';
+  label.style.userSelect = 'none';
   label.style.whiteSpace = 'nowrap';
-  label.style.transform = 'translateX(10%)';
+
+  var button = document.createElement('button');
   button.setAttribute('aria-label', 'Abrir chat');
   button.innerHTML = '💬';
-  button.style.position = 'fixed';
-  button.style.right = '20px';
-  button.style.bottom = '20px';
-  button.style.width = '60px';
-  button.style.height = '60px';
+  button.style.width = '48px';
+  button.style.height = '48px';
   button.style.border = 'none';
   button.style.borderRadius = '999px';
-  button.style.background = 'linear-gradient(135deg, #0f172a, #06b6d4)';
+  button.style.background = 'linear-gradient(135deg, #0f172a 10%, #06b6d4 100%)';
   button.style.color = '#fff';
-  button.style.fontSize = '26px';
+  button.style.fontSize = '22px';
   button.style.cursor = 'pointer';
-  button.style.boxShadow = '0 10px 30px rgba(2, 132, 199, .35)';
-  button.style.zIndex = '999999';
+  button.style.boxShadow = '0 8px 20px rgba(6, 182, 212, 0.45)';
+  button.style.display = 'flex';
+  button.style.alignItems = 'center';
+  button.style.justifyContent = 'center';
+  button.style.flexShrink = '0';
 
   var frame = document.createElement('iframe');
   frame.src = baseUrl + '/widget';
   frame.style.position = 'fixed';
-  frame.style.right = '20px';
+  frame.style.right = '18px';
   frame.style.bottom = '92px';
   frame.style.width = '380px';
   frame.style.maxWidth = 'calc(100vw - 24px)';
@@ -586,16 +640,16 @@ WIDGET_JS = r"""
   frame.style.zIndex = '999998';
   frame.style.display = 'none';
 
-button.addEventListener('click', function () {
+launcher.addEventListener('click', function () {
   var isOpen = frame.style.display === 'block';
 
   frame.style.display = isOpen ? 'none' : 'block';
-  label.style.display = isOpen ? 'block' : 'none';
 });
 
+  launcher.appendChild(label);
+  launcher.appendChild(button);
   document.body.appendChild(frame);
-  document.body.appendChild(button);
-  document.body.appendChild(label);
+  document.body.appendChild(launcher);
 
   window.addEventListener('message', function (event) {
     if (event.data === 'closeChat') {

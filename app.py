@@ -243,6 +243,7 @@ DOUBT_INTENT_KEYWORDS = {
     "sirve de verdad",
 }
 
+
 TRACKING_MISSING_INTENT_KEYWORDS = {
     "no tengo numero de seguimiento",
     "no tengo número de seguimiento",
@@ -258,6 +259,7 @@ TRACKING_MISSING_INTENT_KEYWORDS = {
     "no encuentro mi numero de seguimiento",
     "no encuentro mi número de seguimiento",
 }
+
 
 
 def normalize_text(text: str) -> str:
@@ -353,6 +355,7 @@ def build_reply(message: str) -> tuple[str, List[str]]:
             "En esos casos suele dar muy buen resultado y por eso muchas personas lo eligen antes de gastar mucho más en otra solución."
         ), ["¿Cómo se aplica?", "¿Cuánto sale?"]
 
+
     if looks_like_tracking_number(message):
         return (
             "Perfecto 👍\n\n"
@@ -369,6 +372,8 @@ def build_reply(message: str) -> tuple[str, List[str]]:
             "Te recomiendo revisar también spam o promociones por si llegó ahí.\n\n"
             "Con ese número después podés seguir tu pedido directamente desde la página de Andreani."
         ), ["Mi pedido no llegó todavía", "Hablar por mail"]
+
+
 
     faq = find_best_faq(message)
     if faq:

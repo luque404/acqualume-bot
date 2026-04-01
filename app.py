@@ -244,6 +244,24 @@ DOUBT_INTENT_KEYWORDS = {
 }
 
 
+TRACKING_MISSING_INTENT_KEYWORDS = {
+    "no tengo numero de seguimiento",
+    "no tengo número de seguimiento",
+    "no me llego el numero de seguimiento",
+    "no me llegó el número de seguimiento",
+    "no recibi el numero de seguimiento",
+    "no recibí el número de seguimiento",
+    "no tengo tracking",
+    "no me llego el tracking",
+    "no me llegó el tracking",
+    "donde veo mi numero de seguimiento",
+    "dónde veo mi número de seguimiento",
+    "no encuentro mi numero de seguimiento",
+    "no encuentro mi número de seguimiento",
+}
+
+
+
 def normalize_text(text: str) -> str:
     text = text.lower().strip()
     replacements = {
@@ -263,6 +281,20 @@ def normalize_text(text: str) -> str:
 
 def default_suggestions() -> List[str]:
     return BASE_QUICK_REPLIES.copy()
+
+
+def looks_like_tracking_number(message: str) -> bool:
+    text = message.strip()
+    if re.search(r"\d{10,}", text):
+        return True
+
+    tokens = re.findall(r"[A-Za-z0-9]+", text)
+    for token in tokens:
+        digit_count = sum(1 for c in token if c.isdigit())
+        letter_count = sum(1 for c in token if c.isalpha())
+        if digit_count >= 10 and letter_count <= 2:
+            return True
+    return False
 
 
 def find_best_faq(message: str) -> FAQ | None:
@@ -322,6 +354,26 @@ def build_reply(message: str) -> tuple[str, List[str]]:
             "Es un producto pensado para mejorar marcas y rayones leves sin afectar el color ni el brillo original.\n\n"
             "En esos casos suele dar muy buen resultado y por eso muchas personas lo eligen antes de gastar mucho más en otra solución."
         ), ["¿Cómo se aplica?", "¿Cuánto sale?"]
+
+
+    if looks_like_tracking_number(message):
+        return (
+            "Perfecto 👍\n\n"
+            "Ese parece ser tu número de seguimiento.\n\n"
+            "Podés revisarlo directamente en la página de Andreani para ver el estado actualizado.\n\n"
+            "Si figura como “En camino”, significa que ya está en tránsito.\n"
+            "Si aparece como “Pendiente de ingreso”, puede tardar un poco en actualizarse.\n\n"
+            "Si ves algo que no te cierra, podés escribirnos y lo vemos con vos."
+        ), ["Mi pedido no llegó todavía", "¿En cuánto llega?"]
+
+    if any(keyword in msg for keyword in TRACKING_MISSING_INTENT_KEYWORDS):
+        return (
+            "El número de seguimiento suele enviarse por mail unos días después de haber realizado la compra 👍\n\n"
+            "Te recomiendo revisar también spam o promociones por si llegó ahí.\n\n"
+            "Con ese número después podés seguir tu pedido directamente desde la página de Andreani."
+        ), ["Mi pedido no llegó todavía", "Hablar por mail"]
+
+
 
     faq = find_best_faq(message)
     if faq:
